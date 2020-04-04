@@ -1,10 +1,11 @@
 package strings
 
 import (
-	"unicode"
 	"bytes"
+	"unicode"
 )
 
+// SwapCase Return swap cased string.
 func SwapCase(s string) string {
 	var buf bytes.Buffer
 	for _, x := range s {
