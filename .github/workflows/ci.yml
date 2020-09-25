@@ -10,7 +10,7 @@ jobs:
   test:
     strategy:
       matrix:
-        go: [1.11.x, 1.12.x, 1.13.x, 1.14.x, 1.x, master]
+        go: [1.11.x, 1.12.x, 1.13.x, 1.14.x, 1.x]
     name: Build
     runs-on: ubuntu-latest
     steps:
