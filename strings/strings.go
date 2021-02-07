@@ -7,6 +7,57 @@ import (
 	"unicode/utf8"
 )
 
+// Arg slice args
+type Arg struct {
+	Start int
+	End   int
+}
+
+// Option option arg
+type Option func(*Arg)
+
+// Start option argument named start
+func Start(start int) Option {
+	return func(args *Arg) {
+		args.Start = start
+	}
+}
+
+// End option argument named end
+func End(end int) Option {
+	return func(args *Arg) {
+		args.End = end
+	}
+}
+
+func min(x, y int) int {
+	if x > y {
+		return y
+	}
+	return x
+}
+
+func max(x, y int) int {
+	if x > y {
+		return x
+	}
+	return y
+}
+
+func adjustIndex(start, end, length int) (int, int) {
+	if end > length {
+		end = length
+	} else if end < 0 {
+		end += length
+		end = max(end, 0)
+	}
+	if start < 0 {
+		start += length
+		start = max(start, 0)
+	}
+	return start, end
+}
+
 // lastExplode splits s into a slice of UTF-8 strings,
 // one string per Unicode character up to a maximum of n (n < 0 means no limit).
 // Invalid UTF-8 sequences become correct encodings of U+FFFD.
@@ -30,6 +81,22 @@ func lastExplode(s string, n int) []string {
 // Length Return rune count.
 func Length(s string) int {
 	return utf8.RuneCountInString(s)
+}
+
+// Count Return the number of non-overlapping occurrences of substring sub in the range [start, end]. Optional arguments start and end are interpreted as in slice notation.
+func Count(s, sub string, options ...Option) int {
+	arg := Arg{
+		Start: 0,
+		End:   len(s),
+	}
+	for _, option := range options {
+		option(&arg)
+	}
+	start, end := adjustIndex(arg.Start, arg.End, len(s))
+	if (end - start) < 0 {
+		return 0
+	}
+	return strings.Count(s[start:end], sub)
 }
 
 // SwapCase Return swap cased string.

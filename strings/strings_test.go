@@ -5,6 +5,53 @@ import (
 	"testing"
 )
 
+const MaxUint = ^uint(0)
+const MinUint = 0
+const MaxInt = int(MaxUint >> 1)
+const MinInt = -MaxInt - 1
+
+func TestCount(t *testing.T) {
+	type args struct {
+		s       string
+		sub     string
+		options []Option
+	}
+	tests := []struct {
+		name string
+		args args
+		want int
+	}{
+		{"", args{"aaa", "a", []Option{}}, 3},
+		{"", args{"aaa", "b", []Option{}}, 0},
+		{"", args{"aaa", "a", []Option{Start(1)}}, 2},
+		{"", args{"aaa", "a", []Option{Start(10)}}, 0},
+		{"", args{"aaa", "a", []Option{Start(-1)}}, 1},
+		{"", args{"aaa", "a", []Option{Start(-10)}}, 3},
+		{"", args{"aaa", "a", []Option{Start(0), End(1)}}, 1},
+		{"", args{"aaa", "a", []Option{Start(0), End(10)}}, 3},
+		{"", args{"aaa", "a", []Option{Start(0), End(-1)}}, 2},
+		{"", args{"aaa", "a", []Option{Start(0), End(-10)}}, 0},
+		{"", args{"aaa", "", []Option{Start(1)}}, 3},
+		{"", args{"aaa", "", []Option{Start(3)}}, 1},
+		{"", args{"aaa", "", []Option{Start(10)}}, 0},
+		{"", args{"aaa", "", []Option{Start(-1)}}, 2},
+		{"", args{"aaa", "", []Option{Start(-10)}}, 4},
+		{"", args{"", "", []Option{}}, 1},
+		{"", args{"", "", []Option{Start(1), End(1)}}, 0},
+		{"", args{"", "", []Option{Start(MaxInt), End(0)}}, 0},
+		{"", args{"", "xx", []Option{}}, 0},
+		{"", args{"", "xx", []Option{Start(1), End(1)}}, 0},
+		{"", args{"", "xx", []Option{Start(MaxInt), End(0)}}, 0},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := Count(tt.args.s, tt.args.sub, tt.args.options...); got != tt.want {
+				t.Errorf("Count() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 func TestSwapCase(t *testing.T) {
 	type args struct {
 		s string
