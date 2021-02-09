@@ -41,6 +41,31 @@ func TestCapitalize(t *testing.T) {
 		})
 	}
 }
+func TestCaseFold(t *testing.T) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{"", args{"hello"}, "hello"},
+		{"", args{"hELlo"}, "hello"},
+		{"", args{"ß"}, "ss"},
+		{"", args{"ﬁ"}, "fi"},
+		{"", args{"\u03a3"}, "\u03c3"},
+		{"", args{"A\u0345\u03a3"}, "a\u03b9\u03c3"},
+		{"", args{"\u00b5"}, "\u03bc"},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := CaseFold(tt.args.s); got != tt.want {
+				t.Errorf("CaseFold() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
 
 func TestCount(t *testing.T) {
 	type args struct {
