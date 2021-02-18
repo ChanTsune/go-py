@@ -69,8 +69,8 @@ func LJust(s string, width int, fillChar rune) string {
 // Center Return padded string.
 func Center(s string, width int, fillChar rune) string {
 	if fillLen := width - Length(s); fillLen >= 0 {
-		r := fillLen / 2
-		l := fillLen - r
+		l := fillLen/2 + (fillLen & width & 1)
+		r := fillLen - l
 		f := string(fillChar)
 		return strings.Repeat(f, l) + s + strings.Repeat(f, r)
 	}
