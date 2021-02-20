@@ -60,6 +60,22 @@ func adjustIndex(start, end, length int) (int, int) {
 	return start, end
 }
 
+func allForStringFunc(s string, condition func(rune) bool) bool {
+	for _, r := range s {
+		if !condition(r) {
+			return false
+		}
+	}
+	return true
+}
+
+func isX(s string, whenEmpty bool, condition func(rune) bool) bool {
+	if len(s) == 0 {
+		return whenEmpty
+	}
+	return allForStringFunc(s, condition)
+}
+
 // lastExplode splits s into a slice of UTF-8 strings,
 // one string per Unicode character up to a maximum of n (n < 0 means no limit).
 // Invalid UTF-8 sequences become correct encodings of U+FFFD.
