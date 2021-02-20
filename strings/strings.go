@@ -169,17 +169,6 @@ func LJust(s string, width int, fillChar rune) string {
 	return s
 }
 
-// Center Return padded string.
-func Center(s string, width int, fillChar rune) string {
-	if fillLen := width - Length(s); fillLen >= 0 {
-		l := fillLen/2 + (fillLen & width & 1)
-		r := fillLen - l
-		f := string(fillChar)
-		return strings.Repeat(f, l) + s + strings.Repeat(f, r)
-	}
-	return s
-}
-
 // Partition Return string.
 func Partition(s, sep string) (string, string, string) {
 	if v := strings.SplitN(s, sep, 2); len(v) == 2 {

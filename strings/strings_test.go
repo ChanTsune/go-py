@@ -195,36 +195,6 @@ func TestLJust(t *testing.T) {
 	}
 }
 
-func TestCenter(t *testing.T) {
-	type args struct {
-		s        string
-		width    int
-		fillChar rune
-	}
-	tests := []struct {
-		name string
-		args args
-		want string
-	}{
-		{
-			name: "TestRJust",
-			args: args{
-				s:        "0123",
-				width:    7,
-				fillChar: ' ',
-			},
-			want: "  0123 ",
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := Center(tt.args.s, tt.args.width, tt.args.fillChar); got != tt.want {
-				t.Errorf("Center() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
-
 func TestLength(t *testing.T) {
 	type args struct {
 		s string
