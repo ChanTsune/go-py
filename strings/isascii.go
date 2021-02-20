@@ -6,6 +6,5 @@ func IsASCII(s string) bool {
 }
 
 func isASCII(r rune) bool {
-	i := int64(r)
-	return 0x00 <= i && i <= 0x7f
+	return 0x00 <= r && r <= 0x7f
 }
