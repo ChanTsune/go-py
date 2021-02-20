@@ -101,18 +101,6 @@ func Length(s string) int {
 	return utf8.RuneCountInString(s)
 }
 
-// Capitalize Return a copy of the string with its first character capitalized and the rest lowercased.
-func Capitalize(s string) string {
-	length := Length(s)
-	if length == 0 {
-		return s
-	} else if length == 1 {
-		return strings.ToUpper(s)
-	}
-	r, size := utf8.DecodeRuneInString(s)
-	return string(unicode.ToUpper(r)) + strings.ToLower(s[size:])
-}
-
 // CaseFold Return a casefolded copy of the string. Casefolded strings may be used for caseless matching. Casefolding is similar to lowercasing but more aggressive because it is intended to remove all case distinctions in a string. For example, the German lowercase letter 'ß' is equivalent to "ss". Since it is already lowercase, lower() would do nothing to 'ß'; casefold() converts it to "ss".
 func CaseFold(s string) string {
 	c := cases.Fold()
