@@ -149,14 +149,6 @@ func RJust(s string, width int, fillChar rune) string {
 	return s
 }
 
-// LJust Return padded string.
-func LJust(s string, width int, fillChar rune) string {
-	if fillLen := width - Length(s); fillLen >= 0 {
-		return s + strings.Repeat(string(fillChar), fillLen)
-	}
-	return s
-}
-
 // Partition Return string.
 func Partition(s, sep string) (string, string, string) {
 	if v := strings.SplitN(s, sep, 2); len(v) == 2 {
