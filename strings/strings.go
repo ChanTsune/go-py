@@ -212,3 +212,7 @@ func LastSplitAfterN(s, sep string, n int) []string {
 func LastSplitAfter(s, sep string) []string {
 	return genLastSplit(s, sep, len(sep), -1)
 }
+
+func isCased(r rune) bool {
+	return unicode.IsUpper(r) || unicode.IsLower(r) || unicode.IsTitle(r)
+}
