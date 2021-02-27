@@ -149,14 +149,6 @@ func RJust(s string, width int, fillChar rune) string {
 	return s
 }
 
-// Partition Return string.
-func Partition(s, sep string) (string, string, string) {
-	if v := strings.SplitN(s, sep, 2); len(v) == 2 {
-		return v[0], sep, v[1]
-	}
-	return s, "", ""
-}
-
 // RPartition Return string.
 func RPartition(s, sep string) (string, string, string) {
 	if v := LastSplitN(s, sep, 2); len(v) == 2 {
