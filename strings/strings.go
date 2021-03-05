@@ -141,14 +141,6 @@ func SwapCase(s string) string {
 	return buf.String()
 }
 
-// RJust Return padded string.
-func RJust(s string, width int, fillChar rune) string {
-	if fillLen := width - Length(s); fillLen >= 0 {
-		return strings.Repeat(string(fillChar), fillLen) + s
-	}
-	return s
-}
-
 // RPartition Return string.
 func RPartition(s, sep string) (string, string, string) {
 	if v := LastSplitN(s, sep, 2); len(v) == 2 {
