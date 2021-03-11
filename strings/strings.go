@@ -141,14 +141,6 @@ func SwapCase(s string) string {
 	return buf.String()
 }
 
-// RPartition Return string.
-func RPartition(s, sep string) (string, string, string) {
-	if v := LastSplitN(s, sep, 2); len(v) == 2 {
-		return v[0], sep, v[1]
-	}
-	return "", "", s
-}
-
 func genLastSplit(s, sep string, sepSave, n int) []string {
 	if n == 0 {
 		return nil
