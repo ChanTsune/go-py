@@ -130,45 +130,6 @@ func TestLength(t *testing.T) {
 	}
 }
 
-func TestRPartition(t *testing.T) {
-	type args struct {
-		s   string
-		sep string
-	}
-	tests := []struct {
-		name  string
-		args  args
-		want  string
-		want1 string
-		want2 string
-	}{
-		{
-			name: "TestRPartition",
-			args: args{
-				s:   "go-py-go-py",
-				sep: "-",
-			},
-			want:  "go-py-go",
-			want1: "-",
-			want2: "py",
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			got, got1, got2 := RPartition(tt.args.s, tt.args.sep)
-			if got != tt.want {
-				t.Errorf("RPartition() got = %v, want %v", got, tt.want)
-			}
-			if got1 != tt.want1 {
-				t.Errorf("RPartition() got1 = %v, want %v", got1, tt.want1)
-			}
-			if got2 != tt.want2 {
-				t.Errorf("RPartition() got2 = %v, want %v", got2, tt.want2)
-			}
-		})
-	}
-}
-
 func TestLastSplitN(t *testing.T) {
 	type args struct {
 		s   string
