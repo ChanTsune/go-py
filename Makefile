@@ -13,4 +13,5 @@ test: lint
 	go tool cover -html=cover.out -o cover.html
 
 dev:
+	go mod download golang.org/x/tools
 	go install golang.org/x/tools/cmd/goimports
